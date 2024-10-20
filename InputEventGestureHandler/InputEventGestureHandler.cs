@@ -224,7 +224,15 @@ public partial class InputEventGestureHandler : Node
     /// </summary>
     public override void _EnterTree()
     {
-        Instance = this;  // Set the instance for singleton access.
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            GD.PrintErr("Warning: Multiple instances of InputEventGestureHandler detected. Only one instance should exist.");
+            QueueFree(); // Remove this node to maintain a single instance
+        }
     }
 
     /// <summary>
@@ -241,7 +249,7 @@ public partial class InputEventGestureHandler : Node
     /// Processes various input events to detect gestures like touch, drag, and swipe.
     /// </summary>
     /// <param name="event">The input event.</param>
-    public override void _UnhandledInput(InputEvent @event)
+    public override void _Input(InputEvent @event)
     {
         // Detect drag gestures from screen drag input events
         if (@event is InputEventScreenDrag screenDrag)
@@ -346,6 +354,8 @@ public partial class InputEventGestureHandler : Node
             {
                 singleTouchCancelled = true;
                 CancelSingleDrag();
+                EmitSingleTouch(new InputEventSingleScreenTouch(rawGestureData));
+            } else {
                 EmitSingleTouch(new InputEventSingleScreenTouch(rawGestureData));
             }
         }
