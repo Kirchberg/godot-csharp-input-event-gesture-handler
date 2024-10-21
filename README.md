@@ -1,5 +1,7 @@
 # Godot Input Event Gesture Handler (C#)
 
+<img src="Media/godot-csharp-input-event-gesture-handler.jpg" alt="Godot Input Event Gesture Handler Thumbnail"/>
+
 A comprehensive solution for handling touch and gesture inputs in Godot Engine using C#. The `InputEventGestureHandler` class provides high-level gesture detection and emits events for various touch gestures such as taps, swipes, pinches, twists, and more.
 
 ## Table of Contents
@@ -87,11 +89,29 @@ The `InputEventGestureHandler` emits the following C# events:
 The `InputEventGestureHandler` includes configurable constants to adjust gesture detection sensitivity and thresholds:
 
 ```csharp
+private const bool DEFAULT_BINDINGS = true;
+private const bool DEBUG = false;
+
+// Time threshold to consider a drag gesture.
+private const float DRAG_STARTUP_TIME = 0.02f;
+
+// Finger size used to define thresholds in gesture calculations.
+private const float FINGER_SIZE = 100.0f;
+
+// Time threshold to detect multi-finger release gestures.
+private const float MULTI_FINGER_RELEASE_THRESHOLD = 0.1f;
+
+// Time and distance thresholds for detecting tap gestures.
 private const float TAP_TIME_LIMIT = 0.2f;
 private const float TAP_DISTANCE_LIMIT = 25.0f;
+
+// Time and distance limits for detecting long press gestures.
+private const float LONG_PRESS_TIME_THRESHOLD = 0.75f;
+private const float LONG_PRESS_DISTANCE_LIMIT = 25.0f;
+
+// Time and distance thresholds for detecting swipe gestures.
 private const float SWIPE_TIME_LIMIT = 0.5f;
 private const float SWIPE_DISTANCE_THRESHOLD = 200.0f;
-// ... Other configuration constants
 ```
 
 Adjust these values as needed for your game's input requirements.
@@ -105,6 +125,7 @@ Adjust these values as needed for your game's input requirements.
 ```csharp
 public partial class PlayerController : Node
 {
+
     ...
 
     public override void _Ready()
@@ -123,6 +144,9 @@ public partial class PlayerController : Node
     {
         ...
     }
+
+    ...
+
 }
 ```
 
