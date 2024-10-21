@@ -147,7 +147,7 @@ The following table shows the default event and the names of the input actions t
 | Multiple finger swipe (left)       | `multi_swipe_left`      | `j`           |
 | Multiple finger swipe (up-left)    | `multi_swipe_up_left`   | `u`           |
 
-**\*** There are two options to enable single finger gestures:
+**There are two options to enable single finger gestures:**
 
 1. Go to **Project > Project Settings > General > Input Devices > Pointing** and turn on *Emulate Touch From Mouse* to emulate a single finger touch with the left click.
 
