@@ -14,6 +14,7 @@ A comprehensive solution for handling touch and gesture inputs in Godot Engine u
   - [Subscribing to Events](#subscribing-to-events)
   - [Available Events](#available-events)
 - [Configuration](#configuration)
+- [Gesture Emulation](#gesture-emulation)
 - [Examples](#examples)
   - [Handling Single Touch and Drag](#handling-single-touch-and-drag)
 - [Troubleshooting](#troubleshooting)
@@ -34,9 +35,9 @@ A comprehensive solution for handling touch and gesture inputs in Godot Engine u
 
 1. **Clone or Download** the `InputEventGestureHandler` folder and include it in your Godot project.
 2. **Autoload the InputEventGestureHandler**:
-   - In Godot, go to **Project > Project Settings > GLobals**.
-   - Click on folder icon right next to the path and select `InputEventGestureHandler.cs`.
-   - Set the **Node Name** to `InputEventGestureHandler` and click **+ Add**.
+   - In Godot, go to **Project > Project Settings > AutoLoad**.
+   - Click on the folder icon next to the path and select `InputEventGestureHandler.cs`.
+   - Set the **Node Name** to `InputEventGestureHandler` and click **Add**.
 
 ### Integration
 
@@ -115,6 +116,42 @@ private const float SWIPE_DISTANCE_THRESHOLD = 200.0f;
 ```
 
 Adjust these values as needed for your game's input requirements.
+
+## Gesture Emulation
+
+The gestures can be triggered by named [input actions](https://docs.godotengine.org/en/stable/tutorials/inputs/input_examples.html#inputmap) with specific names. If the input action does not exist, there is a default event that will trigger the gesture.
+
+The following table shows the default event and the names of the input actions that will trigger each of the gestures that can be emulated.
+
+| Gesture name                       | Input action name       | Default event |
+|------------------------------------|-------------------------|---------------|
+| Single touch                       | `single_touch`          | **\***        |
+| Multiple touch (2 fingers)         | `multi_touch`           | Middle click  |
+| Pinch (outward)                    | `pinch_outward`         | Scroll up     |
+| Pinch (inward)                     | `pinch_inward`          | Scroll down   |
+| Twist                              | `twist`                 | Right click   |
+| Single finger swipe (up)           | `single_swipe_up`       | `w`           |
+| Single finger swipe (up-right)     | `single_swipe_up_right` | `e`           |
+| Single finger swipe (right)        | `single_swipe_right`    | `d`           |
+| Single finger swipe (down-right)   | `single_swipe_down_right` | `c`         |
+| Single finger swipe (down)         | `single_swipe_down`     | `x`           |
+| Single finger swipe (down-left)    | `single_swipe_down_left`| `z`           |
+| Single finger swipe (left)         | `single_swipe_left`     | `a`           |
+| Single finger swipe (up-left)      | `single_swipe_up_left`  | `q`           |
+| Multiple finger swipe (up)         | `multi_swipe_up`        | `i`           |
+| Multiple finger swipe (up-right)   | `multi_swipe_up_right`  | `o`           |
+| Multiple finger swipe (right)      | `multi_swipe_right`     | `l`           |
+| Multiple finger swipe (down-right) | `multi_swipe_down_right`| `.`           |
+| Multiple finger swipe (down)       | `multi_swipe_down`      | `,`           |
+| Multiple finger swipe (down-left)  | `multi_swipe_down_left` | `m`           |
+| Multiple finger swipe (left)       | `multi_swipe_left`      | `j`           |
+| Multiple finger swipe (up-left)    | `multi_swipe_up_left`   | `u`           |
+
+**\*** There are two options to enable single finger gestures:
+
+1. Go to **Project > Project Settings > General > Input Devices > Pointing** and turn on *Emulate Touch From Mouse* to emulate a single finger touch with the left click.
+
+2. Go to **Project > Project Settings > General > Input Devices > Pointing** and turn off both *Emulate Touch From Mouse* and *Emulate Mouse From Touch*. Then set an input action called `single_touch`.
 
 ## Examples
 
